@@ -19,7 +19,7 @@ fi
 # --- Docker ---
 if ! command -v docker >/dev/null 2>&1; then
   log "Installing Docker..."
-  sudo dnf install -y docker git curl
+  sudo dnf install -y docker git
 fi
 sudo systemctl enable --now docker
 sudo usermod -aG docker "$(whoami)" || true
