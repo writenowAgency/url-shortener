@@ -117,7 +117,7 @@ docker-compose up -d --build
 After SSH, run **once** (requires a **public** GitHub repo — no `git` password prompt):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MampotjeMabusela/url-shortener/main/scripts/ec2-full-bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/writenowAgency/url-shortener/master/scripts/ec2-full-bootstrap.sh | bash
 ```
 
 Then set a strong `ADMIN_PASS` in `/opt/url-shortener/.env`, and optionally `sudo reboot` and re-test `curl http://127.0.0.1:8080/healthz`.

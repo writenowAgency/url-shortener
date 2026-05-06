@@ -8,7 +8,7 @@ cd "$APP_DIR"
 echo "==> Repo"
 git remote -v || true
 # Public repo (no auth). Override with: export GIT_ORIGIN_URL='https://github.com/you/repo.git'
-GIT_ORIGIN_URL="${GIT_ORIGIN_URL:-https://github.com/MampotjeMabusela/url-shortener.git}"
+GIT_ORIGIN_URL="${GIT_ORIGIN_URL:-https://github.com/writenowAgency/url-shortener.git}"
 git remote set-url origin "$GIT_ORIGIN_URL" 2>/dev/null || git remote add origin "$GIT_ORIGIN_URL"
 git pull
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Run ON EC2 as ec2-user (after SSH). One command — fetches this script from GitHub raw (public repo):
-#   curl -fsSL https://raw.githubusercontent.com/MampotjeMabusela/url-shortener/main/scripts/ec2-full-bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/writenowAgency/url-shortener/master/scripts/ec2-full-bootstrap.sh | bash
 set -eu
 
-REPO_URL="${REPO_URL:-https://github.com/MampotjeMabusela/url-shortener.git}"
+REPO_URL="${REPO_URL:-https://github.com/writenowAgency/url-shortener.git}"
 APP_DIR="${APP_DIR:-/opt/url-shortener}"
-GIT_REF="${GIT_REF:-main}"
+GIT_REF="${GIT_REF:-master}"
 
 log() { echo "[bootstrap] $*"; }
 
