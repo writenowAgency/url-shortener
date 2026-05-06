@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener Admin</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <nav class="top-tabs" aria-label="Main sections">
+        <button id="tab-dashboard" class="tab-btn active" type="button">Dashboard</button>
+        <button id="tab-about" class="tab-btn" type="button">About WriteNow</button>
+      </nav>
+
+      <section id="dashboard-view">
+      <header class="hero">
+        <div class="brand-wrap">
+          <div class="brand-logo-shell">
+            <img
+              src="/static/assets/writenow-logo.png"
+              alt="WriteNow Agency logo"
+              class="brand-logo"
+            />
+          </div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">WriteNow URL Platform</p>
+          <h1>URL Shortener Control Center</h1>
+          <p class="subtitle">Create, track, and share links from one place.</p>
+        </div>
+        <button id="refresh-btn" class="btn-secondary" type="button">Refresh</button>
+      </header>
+
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <p class="kpi-label">Total Links</p>
+          <p id="kpi-total-links" class="kpi-value">0</p>
+        </article>
+        <article class="kpi-card">
+          <p class="kpi-label">Total Clicks</p>
+          <p id="kpi-total-clicks" class="kpi-value">0</p>
+        </article>
+        <article class="kpi-card">
+          <p class="kpi-label">Most Clicked</p>
+          <p id="kpi-top-slug" class="kpi-value">-</p>
+        </article>
+        <article class="kpi-card">
+          <p class="kpi-label">Last Created</p>
+          <p id="kpi-last-created" class="kpi-value">-</p>
+        </article>
+      </section>
+
+      <section class="card card-create">
+        <h2>Create short link</h2>
+        <form id="shorten-form" class="create-form">
+          <input id="url-input" type="url" placeholder="https://www.google.com" required />
+          <button id="submit-btn" type="submit">Shorten</button>
+        </form>
+        <p id="form-message" class="message" aria-live="polite"></p>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>All links</h2>
+          <input id="search-input" type="search" placeholder="Search by slug or URL..." />
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Slug</th>
+                <th>Long URL</th>
+                <th>Clicks</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="links-body"></tbody>
+          </table>
+        </div>
+        <p id="empty-state" class="empty-state">No links yet. Create your first short URL above.</p>
+      </section>
+
+      <section class="card legal-card">
+        <div class="legal-grid">
+          <article class="legal-panel">
+            <h3>About This App</h3>
+            <p>
+              This URL Shortener helps teams create compact links, monitor click activity, and
+              manage link performance from a single dashboard. It is built for reliability, simple
+              operations, and secure admin-controlled usage.
+            </p>
+          </article>
+          <article class="legal-panel">
+            <h3>Terms &amp; Conditions</h3>
+            <ul>
+              <li>Use this service only for lawful content and legitimate business use cases.</li>
+              <li>Do not shorten malicious, phishing, or harmful links.</li>
+              <li>Admins are responsible for links created with their credentials.</li>
+              <li>Service availability and link retention are provided on a best-effort basis.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      </section>
+
+      <section id="about-view" class="card about-card" hidden>
+        <h2>About WriteNow Agency</h2>
+        <p class="about-lead">
+          🚀 WriteNow Agency PTY LTD: Transforming Ideas into Reality. We specialize in delivering
+          world-class web development, SaaS, AI, and custom software solutions. From innovative
+          designs to cutting-edge technology, we are your all-in-one creative powerhouse.
+        </p>
+
+        <div class="about-grid">
+          <article class="about-panel">
+            <h3>Our Services</h3>
+            <ul>
+              <li>🌐 Web Development - Stunning, responsive websites designed to captivate and convert.</li>
+              <li>🛠️ SaaS &amp; AI Solutions - Advanced software and AI integrations tailored to your needs.</li>
+              <li>📈 Custom Software Development - Scalable, efficient tools built to drive success.</li>
+              <li>
+                💼 Business Process Automation Solutions - Streamline operations with tailored automation
+                strategies that improve efficiency, reduce costs, and eliminate manual tasks.
+              </li>
+              <li>💡 Bundled Packages - Save big with discounts on web and AI bundles.</li>
+            </ul>
+          </article>
+
+          <article class="about-panel">
+            <h3>Company Snapshot</h3>
+            <ul>
+              <li><strong>Website:</strong> <a href="https://www.writenowagency.com" target="_blank" rel="noopener noreferrer">www.writenowagency.com</a></li>
+              <li><strong>Phone:</strong> 0110839898</li>
+              <li><strong>Industry:</strong> IT Services and IT Consulting</li>
+              <li><strong>Company Size:</strong> 11-50 employees</li>
+              <li><strong>Headquarters:</strong> Sandton, Gauteng</li>
+              <li><strong>Founded:</strong> 2010</li>
+            </ul>
+          </article>
+        </div>
+
+        <article class="about-panel">
+          <h3>Specialties</h3>
+          <p>
+            Operational efficiency, Web development, E-commerce solutions, SAAS solutions, Hosting
+            and domain services, Data Analytics and reporting, AI Solutions, Agile Product Development
+            Consultation, Enterprise AI Solutions, Automated Task/Processes solution, Custom Software
+            Development, and UI/UX design.
+          </p>
+        </article>
+
+        <p class="about-lead">
+          With a global reach, WriteNow Agency proudly serves businesses worldwide. Whether you are
+          a startup or an enterprise, our expert team is dedicated to helping you achieve your digital
+          goals with professionalism, innovation, and unparalleled client satisfaction.
+        </p>
+        <p class="about-cta">🌟 Let us build the future together!</p>
+        <p class="about-tags">#InnovationLeaders #DigitalTransformation #WriteNowAgency</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 WriteNow Agency. All rights reserved.</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/static/dashboard.js"></script>
+  </body>
+</html>

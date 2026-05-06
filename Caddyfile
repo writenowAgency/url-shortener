@@ -1,0 +1,8 @@
+:80 {
+  reverse_proxy app:3000
+
+  log {
+    output file /var/log/caddy/access.log
+    format console
+  }
+}

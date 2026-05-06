@@ -1,0 +1,54 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: url-shortener-app
+    env_file:
+      - .env
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.50
+    volumes:
+      - ./data:/app/data
+    networks:
+      - internal
+
+  caddy:
+    image: caddy:2.8
+    container_name: url-shortener-caddy
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.25
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./logs/caddy:/var/log/caddy
+    depends_on:
+      - app
+    networks:
+      - internal
+
+  cloudflared:
+    profiles:
+      - cloudflare
+    image: cloudflare/cloudflared:latest
+    container_name: url-shortener-cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    mem_limit: 128m
+    cpus: 0.25
+    depends_on:
+      - caddy
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

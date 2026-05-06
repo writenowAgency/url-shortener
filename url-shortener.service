@@ -1,0 +1,19 @@
+[Unit]
+Description=URL Shortener Docker Compose Stack
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/url-shortener
+# Do not rely on PATH: scripts call /usr/local/bin/docker-compose or `docker compose`.
+ExecStart=/bin/bash /opt/url-shortener/scripts/stack-up.sh
+ExecStop=/bin/bash /opt/url-shortener/scripts/stack-down.sh
+TimeoutStartSec=0
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
