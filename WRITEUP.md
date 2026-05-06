@@ -67,6 +67,51 @@ The design intentionally stays inside AWS free-tier/no-cost tooling:
 
 Balancing strict free-tier constraints with production-like security and reproducibility (especially no inbound web ports while still providing a public URL). I resolved this by structuring around Cloudflare Tunnel + closed security groups and documenting exact, repeatable deployment steps in `README.md`.
 
+## Load test results
+
+Instance: t2.micro (1 GB RAM), Amazon Linux 2023, 1 GB swap enabled.
+
+Tool: Apache Bench (`ab`)
+
+Command:
+```
+ab -n 2000 -c 5 -s 120 http://127.0.0.1:8080/healthz
+```
+
+Results:
+```
+Server Software:        Caddy
+Concurrency Level:      5
+Time taken for tests:   3.842 seconds
+Complete requests:      2000
+Failed requests:        0
+Requests per second:    520.61 [#/sec] (mean)
+Time per request:       9.604 [ms] (mean)
+
+Percentage of requests served within a certain time (ms):
+  50%      4
+  75%      6
+  90%     15
+  95%     61
+  99%     67
+ 100%     75 (longest request)
+```
+
+Memory during load test (`docker stats --no-stream`):
+```
+url-shortener-app:    24.88 MiB / 256 MiB (9.72%)
+url-shortener-caddy:  15.71 MiB / 128 MiB (12.27%)
+```
+
+System memory (`free -m`):
+```
+Mem:   916 MB total, 275 MB used, 105 MB free
+Swap:  1023 MB total, 11 MB used
+```
+
+**Zero failed requests. Both containers stayed well under their memory limits.
+Swap was barely touched (11 MB used), confirming the stack fits comfortably in 1 GB RAM.**
+
 ## Estimated time spent
 
 Approximately **8-10 hours** total, including implementation, deployment artifacts, docs, and verification.
