@@ -19,7 +19,10 @@ fi
 # --- Docker ---
 if ! command -v docker >/dev/null 2>&1; then
   log "Installing Docker..."
-  sudo dnf install -y docker git --allowerasing
+  # AL2023 ships curl-minimal which conflicts with the docker package dependency on curl.
+  # Swap it out first, then install docker and git cleanly.
+  sudo dnf swap -y curl-minimal curl 2>/dev/null || true
+  sudo dnf install -y docker git
 fi
 sudo systemctl enable --now docker
 sudo usermod -aG docker "$(whoami)" || true
